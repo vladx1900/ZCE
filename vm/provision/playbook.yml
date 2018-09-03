@@ -1,0 +1,22 @@
+---
+# Ansible playbook for Ansible Basic LAMP server.
+
+- hosts: all
+  become: yes
+
+  vars_files:
+    - vars/main.yml
+
+  pre_tasks:
+    - include: tasks/init.yml
+
+  roles:
+    - { role: geerlingguy.mysql, tags: ['database'] }
+    - { role: geerlingguy.apache, tags: ['webserver'] }
+    - { role: geerlingguy.php-versions, when: php_version != '', tags: ['php'] }
+    - { role: geerlingguy.php, tags: ['php'] }
+    - { role: geerlingguy.apache-php-fpm, tags: ['php', 'fpm'] }
+    - { role: geerlingguy.adminer, tags: ['database'] }
+    - { role: geerlingguy.composer, tags: ['php'] }
+    - { role: geerlingguy.php-xdebug, tags: ['xdebug', 'php'] }
+    # - { role: welink.development, tags: ['development'] }

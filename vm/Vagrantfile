@@ -1,0 +1,65 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # =============================================== #
+  #      The box that will be used for this VM      #
+  # =============================================== #
+
+  config.vm.box = "bento/ubuntu-16.04"
+
+  # =============================================== #
+  #                 Provider settings               #
+  # =============================================== #
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+    v.name = "ZCE VM"
+  end
+
+  # =============================================== #
+  #                 Netwrok settings                #
+  # =============================================== #
+
+  config.vm.hostname = "zce"
+  config.vm.network "private_network", ip: "192.168.50.10"
+  # config.vm.network "forwarded_port", guest: 80, host: 80
+  #config.vm.network "forwarded_port", guest: 80, host: 8080
+  #config.vm.network "forwarded_port", guest: 3306, host: 3306
+  #config.vm.network "forwarded_port", guest: 22, host: 22
+
+  # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
+  config.vm.define :zce do |name|
+  end
+
+  # =============================================== #
+  #                 Shared folders                  #
+  # ===============================================
+
+  #config.vm.synced_folder "../share", "/home/vagrant/share"
+  config.vm.synced_folder "../share", "/var/www/"
+
+  # =============================================== #
+  #                   SSH settings                  #
+  # =============================================== #
+
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
+
+  # =============================================== #
+  #                  Provisioning                   #
+  # =============================================== #
+
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provision/requirements/install.yml"
+  end
+
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provision/playbook.yml"
+  end
+end

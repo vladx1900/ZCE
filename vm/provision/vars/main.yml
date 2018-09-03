@@ -1,0 +1,44 @@
+---
+######################
+# Ansible role developer
+# https://github.com/mihalache/ansible-role-development
+######################
+ssh_keys_user: "vagrant"
+ssh_keys_private_key_path: "/vagrant/ssh_keys/id_rsa"
+ssh_keys_public_key_path: "/vagrant/ssh_keys/id_rsa.pub"
+
+git_config_name: "Catalin Vlad"
+git_config_email: "catalin.vlad@zitec.com"
+
+######################
+# Ansible role MySQL
+# https://github.com/geerlingguy/ansible-role-mysql
+######################
+mysql_users:
+  - name: developer
+    host: '%'
+    password: zitec
+    priv: '*.*:ALL,GRANT'
+
+######################
+# Ansible role PHP versions
+# https://github.com/geerlingguy/ansible-role-php-versions
+######################    
+php_version: '7.1'
+
+######################
+# Ansible role Adminer
+# https://github.com/geerlingguy/ansible-role-adminer
+######################
+adminer_add_apache_config: true
+
+######################
+# Ansible role Apache
+# https://github.com/geerlingguy/ansible-role-apache
+######################
+apache_vhosts:
+  - servername: "zce.local"
+    documentroot: "/var/www/html"
+    options: "+Indexes +FollowSymLinks"
+    extra_parameters: |
+         ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:/run/php/php{{ php_version }}-fpm.sock|fcgi://127.0.0.1:9000/var/www/html

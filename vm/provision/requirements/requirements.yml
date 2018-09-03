@@ -1,0 +1,36 @@
+# from GitHub, overriding the name and specifying a specific tag
+- src: https://github.com/geerlingguy/ansible-role-mysql.git
+  version: master
+  name: geerlingguy.mysql
+
+- src: https://github.com/geerlingguy/ansible-role-apache.git
+  version: master
+  name: geerlingguy.apache
+
+- src: https://github.com/geerlingguy/ansible-role-adminer.git
+  version: master
+  name: geerlingguy.adminer
+
+- src: https://github.com/geerlingguy/ansible-role-php.git
+  version: master
+  name: geerlingguy.php
+
+- src: https://github.com/geerlingguy/ansible-role-php-versions.git
+  version: master
+  name: geerlingguy.php-versions
+
+- src: https://github.com/geerlingguy/ansible-role-composer.git
+  version: master
+  name: geerlingguy.composer
+
+- src: https://github.com/geerlingguy/ansible-role-php-xdebug.git
+  version: master
+  name: geerlingguy.php-xdebug
+
+- src: https://github.com/geerlingguy/ansible-role-apache-php-fpm.git
+  version: master
+  name: geerlingguy.apache-php-fpm
+
+- src: https://github.com/mihalache/ansible-role-development.git
+  version: master
+  name: welink.development
